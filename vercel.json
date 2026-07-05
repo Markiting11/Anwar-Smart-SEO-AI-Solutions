@@ -1,0 +1,66 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/about.html",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/services.html",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/portfolio.html",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/blog.html",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog-post.html",
+      "destination": "/blog-post",
+      "permanent": true
+    },
+    {
+      "source": "/contact.html",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/testimonials.html",
+      "destination": "/testimonials",
+      "permanent": true
+    },
+    {
+      "source": "/work-samples.html",
+      "destination": "/work-samples",
+      "permanent": true
+    },
+    {
+      "source": "/auth.html",
+      "destination": "/auth",
+      "permanent": true
+    },
+    {
+      "source": "/admin.html",
+      "destination": "/admin",
+      "permanent": true
+    },
+    {
+      "source": "/404.html",
+      "destination": "/404",
+      "permanent": true
+    }
+  ]
+}
