@@ -2,6 +2,15 @@
 <html lang="en">
 
 <head>
+    <script>
+        // Redirect .html to clean URLs
+        if (window.location.pathname.endsWith('.html')) {
+            const cleanPath = window.location.pathname.endsWith('/index.html') 
+                ? '/' 
+                : window.location.pathname.substring(0, window.location.pathname.indexOf('.html'));
+            window.location.replace(cleanPath + window.location.search + window.location.hash);
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - Anwar Ali</title>
