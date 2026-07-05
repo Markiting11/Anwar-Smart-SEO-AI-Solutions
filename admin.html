@@ -1,0 +1,1169 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Anwar Ali</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: ["class"],
+            theme: {
+                container: {
+                    center: true,
+                    padding: "2rem",
+                    screens: {
+                        "2xl": "1400px",
+                    },
+                },
+                extend: {
+                    colors: {
+                        border: "hsl(var(--border))",
+                        input: "hsl(var(--input))",
+                        ring: "hsl(var(--ring))",
+                        background: "hsl(var(--background))",
+                        foreground: "hsl(var(--foreground))",
+                        primary: {
+                            DEFAULT: "hsl(var(--primary))",
+                            foreground: "hsl(var(--primary-foreground))",
+                        },
+                        secondary: {
+                            DEFAULT: "hsl(var(--secondary))",
+                            foreground: "hsl(var(--secondary-foreground))",
+                        },
+                        destructive: {
+                            DEFAULT: "hsl(var(--destructive))",
+                            foreground: "hsl(var(--destructive-foreground))",
+                        },
+                        muted: {
+                            DEFAULT: "hsl(var(--muted))",
+                            foreground: "hsl(var(--muted-foreground))",
+                        },
+                        accent: {
+                            DEFAULT: "hsl(var(--accent))",
+                            foreground: "hsl(var(--accent-foreground))",
+                        },
+                        popover: {
+                            DEFAULT: "hsl(var(--popover))",
+                            foreground: "hsl(var(--popover-foreground))",
+                        },
+                        card: {
+                            DEFAULT: "hsl(var(--card))",
+                            foreground: "hsl(var(--card-foreground))",
+                        },
+                        navbar: {
+                            DEFAULT: "hsl(var(--navbar))",
+                            foreground: "hsl(var(--navbar-foreground))",
+                        },
+                    },
+                    borderRadius: {
+                        lg: "var(--radius)",
+                        md: "calc(var(--radius) - 2px)",
+                        sm: "calc(var(--radius) - 4px)",
+                    },
+                },
+            },
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Quill.js Rich Text Editor -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="bg-background text-foreground antialiased">
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 bg-navbar border-b border-navbar shadow-sm">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html"
+                    class="flex items-center gap-2 text-xl font-bold text-navbar-foreground hover:opacity-80 transition-opacity">
+                    <img src="assets/logo.png" alt="Anwar Ali Logo" class="w-10 h-10 rounded-full">
+                    <span>Anwar Ali</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="index.html"
+                        class="px-3 py-2 rounded-lg text-sm font-medium transition-all text-navbar-foreground/80 hover:text-primary hover:bg-navbar-foreground/10">
+                        Home
+                    </a>
+                    <a href="about.html"
+                        class="px-3 py-2 rounded-lg text-sm font-medium transition-all text-navbar-foreground/80 hover:text-primary hover:bg-navbar-foreground/10">
+                        About
+                    </a>
+                    <a href="services.html"
+                        class="px-3 py-2 rounded-lg text-sm font-medium transition-all text-navbar-foreground/80 hover:text-primary hover:bg-navbar-foreground/10">
+                        Services
+                    </a>
+                    <a href="portfolio.html"
+                        class="px-3 py-2 rounded-lg text-sm font-medium transition-all text-navbar-foreground/80 hover:text-primary hover:bg-navbar-foreground/10">
+                        Portfolio
+                    </a>
+                    <a href="work-samples.html"
+                        class="px-3 py-2 rounded-lg text-sm font-medium transition-all text-navbar-foreground/80 hover:text-primary hover:bg-navbar-foreground/10">
+                        Work
+                    </a>
+                    <a href="testimonials.html"
+                        class="px-3 py-2 rounded-lg text-sm font-medium transition-all text-navbar-foreground/80 hover:text-primary hover:bg-navbar-foreground/10">
+                        Reviews
+                    </a>
+                    <a href="blog.html"
+                        class="px-3 py-2 rounded-lg text-sm font-medium transition-all text-navbar-foreground/80 hover:text-primary hover:bg-navbar-foreground/10">
+                        Blog
+                    </a>
+                    <a href="contact.html"
+                        class="px-3 py-2 rounded-lg text-sm font-medium transition-all text-navbar-foreground/80 hover:text-primary hover:bg-navbar-foreground/10">
+                        Contact
+                    </a>
+
+                    <a href="contact.html">
+                        <button
+                            class="ml-2 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-9 px-4 py-2 shadow-md hover:shadow-lg transition-shadow bg-primary hover:bg-primary/90 text-primary-foreground">
+                            <i data-lucide="mail" class="w-4 h-4 mr-2"></i>
+                            Hire Me
+                        </button>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button"
+                    class="md:hidden p-2 rounded-md text-navbar-foreground hover:bg-navbar-foreground/10">
+                    <i data-lucide="menu" size="24"></i>
+                    <i data-lucide="x" size="24" class="hidden"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobile-menu"
+                class="hidden md:hidden pb-4 animate-fade-in border-t border-navbar-foreground/20 mt-2 pt-2">
+                <a href="index.html"
+                    class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all text-navbar-foreground/80 hover:text-navbar-foreground hover:bg-navbar-foreground/10">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    Home
+                </a>
+                <a href="about.html"
+                    class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all text-navbar-foreground/80 hover:text-navbar-foreground hover:bg-navbar-foreground/10">
+                    <i data-lucide="user" class="w-4 h-4"></i>
+                    About Me
+                </a>
+                <a href="services.html"
+                    class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all text-navbar-foreground/80 hover:text-navbar-foreground hover:bg-navbar-foreground/10">
+                    <i data-lucide="briefcase" class="w-4 h-4"></i>
+                    Services
+                </a>
+                <a href="portfolio.html"
+                    class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all text-navbar-foreground/80 hover:text-navbar-foreground hover:bg-navbar-foreground/10">
+                    <i data-lucide="folder-open" class="w-4 h-4"></i>
+                    Portfolio
+                </a>
+                <a href="work-samples.html"
+                    class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all text-navbar-foreground/80 hover:text-navbar-foreground hover:bg-navbar-foreground/10">
+                    <i data-lucide="file-text" class="w-4 h-4"></i>
+                    Work Samples
+                </a>
+                <a href="testimonials.html"
+                    class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all text-navbar-foreground/80 hover:text-navbar-foreground hover:bg-navbar-foreground/10">
+                    <i data-lucide="message-circle" class="w-4 h-4"></i>
+                    Testimonials
+                </a>
+                <a href="blog.html"
+                    class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all text-navbar-foreground/80 hover:text-navbar-foreground hover:bg-navbar-foreground/10">
+                    <i data-lucide="file-text" class="w-4 h-4"></i>
+                    Blog
+                </a>
+                <a href="contact.html"
+                    class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all text-navbar-foreground/80 hover:text-navbar-foreground hover:bg-navbar-foreground/10">
+                    <i data-lucide="mail" class="w-4 h-4"></i>
+                    Contact
+                </a>
+                <a href="auth.html"
+                    class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all text-navbar-foreground/80 hover:text-navbar-foreground hover:bg-navbar-foreground/10">
+                    <i data-lucide="log-in" class="w-4 h-4"></i>
+                    Sign In
+                </a>
+                <a href="contact.html">
+                    <button
+                        class="w-full mt-3 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 shadow-md bg-primary hover:bg-primary/90 text-primary-foreground">
+                        <i data-lucide="mail" class="w-4 h-4 mr-2"></i>
+                        Hire Me
+                    </button>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <main class="min-h-[calc(100vh-theme(spacing.16))] py-8 bg-background">
+        <div class="flex items-center justify-center bg-gradient-to-br from-background via-primary/5 to-accent/10 p-4">
+            <div class="w-full max-w-4xl">
+                <!-- Header -->
+                <div class="text-center mb-8">
+                    <div class="inline-flex items-center gap-2 mb-4">
+                        <i data-lucide="layout-dashboard" class="w-12 h-12 text-primary"></i>
+                    </div>
+                    <h1 class="text-4xl font-bold text-foreground mb-2">Admin Dashboard</h1>
+                    <p class="text-muted-foreground">Manage your blog posts</p>
+                    <div id="userInfo" class="mt-2 text-sm text-primary font-medium"></div>
+                </div>
+
+                <!-- Blog Post Creator -->
+                <div class="rounded-xl border bg-card text-card-foreground shadow-lg mb-8">
+                    <div class="p-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-2xl font-semibold">Create New Blog Post</h2>
+                            <button id="logoutBtn" class="text-sm text-destructive hover:underline">
+                                Log Out
+                            </button>
+                        </div>
+
+                        <form id="createPostForm" class="space-y-6">
+                            <!-- Title -->
+                            <div class="space-y-2">
+                                <label for="postTitle" class="text-sm font-medium flex items-center gap-2">
+                                    <i data-lucide="heading" class="w-4 h-4"></i>
+                                    Post Title
+                                </label>
+                                <input type="text" id="postTitle" placeholder="e.g., The Future of Local SEO" required
+                                    class="flex h-12 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" />
+                            </div>
+
+                            <!-- Auto-generated Slug -->
+                            <div class="space-y-2">
+                                <label for="postSlug" class="text-sm font-medium flex items-center gap-2">
+                                    <i data-lucide="link" class="w-4 h-4"></i>
+                                    URL Slug
+                                    <span class="text-xs text-muted-foreground font-normal">(auto-generated)</span>
+                                </label>
+                                <input type="text" id="postSlug" placeholder="the-future-of-local-seo"
+                                    class="flex h-10 w-full rounded-md border border-input bg-muted px-3 py-2 text-sm" />
+                                <p class="text-xs text-muted-foreground">URL: blog-post.html?slug=<span
+                                        id="slugPreview">your-post-title</span></p>
+                            </div>
+
+                            <!-- Excerpt -->
+                            <div class="space-y-2">
+                                <label for="postExcerpt" class="text-sm font-medium flex items-center gap-2">
+                                    <i data-lucide="file-text" class="w-4 h-4"></i>
+                                    Excerpt
+                                    <span class="text-xs text-muted-foreground font-normal">(shown on blog
+                                        listing)</span>
+                                </label>
+                                <textarea id="postExcerpt" rows="3"
+                                    placeholder="Brief summary of your post (150-160 characters recommended)"
+                                    class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"></textarea>
+                                <p class="text-xs text-muted-foreground"><span id="excerptCount">0</span>/160 characters
+                                </p>
+                            </div>
+
+                            <!-- SEO Meta Description -->
+                            <div class="space-y-2">
+                                <label for="metaDescription" class="text-sm font-medium flex items-center gap-2">
+                                    <i data-lucide="search" class="w-4 h-4"></i>
+                                    Meta Description (SEO)
+                                </label>
+                                <textarea id="metaDescription" rows="2"
+                                    placeholder="SEO meta description for search engines" maxlength="160"
+                                    class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"></textarea>
+                                <p class="text-xs text-muted-foreground"><span id="metaCount">0</span>/160 characters
+                                </p>
+                            </div>
+
+                            <!-- Focus Keyword -->
+                            <div class="space-y-2">
+                                <label for="focusKeyword" class="text-sm font-medium flex items-center gap-2">
+                                    <i data-lucide="key" class="w-4 h-4"></i>
+                                    Focus Keyword
+                                </label>
+                                <input type="text" id="focusKeyword" placeholder="e.g., local SEO"
+                                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" />
+                            </div>
+
+                            <!-- Categories/Tags -->
+                            <div class="space-y-2">
+                                <label for="postCategories" class="text-sm font-medium flex items-center gap-2">
+                                    <i data-lucide="tag" class="w-4 h-4"></i>
+                                    Categories
+                                    <span class="text-xs text-muted-foreground font-normal">(comma-separated)</span>
+                                </label>
+                                <input type="text" id="postCategories"
+                                    placeholder="SEO, Digital Marketing, Local Business"
+                                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" />
+                            </div>
+
+                            <!-- Featured Image Upload -->
+                            <div class="space-y-2">
+                                <label class="text-sm font-medium flex items-center gap-2">
+                                    <i data-lucide="image" class="w-4 h-4"></i>
+                                    Featured Image
+                                </label>
+                                <div class="flex gap-2">
+                                    <input type="file" id="imageFile" accept="image/*" class="hidden" />
+                                    <button type="button" id="uploadImageBtn"
+                                        class="inline-flex items-center justify-center rounded-md text-sm font-medium border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
+                                        <i data-lucide="upload" class="w-4 h-4 mr-2"></i>
+                                        Upload Image
+                                    </button>
+                                    <input type="url" id="postImage" placeholder="Or paste image URL"
+                                        class="flex h-10 flex-1 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" />
+                                </div>
+                                <div id="imagePreview" class="hidden mt-2">
+                                    <img src="" alt="Preview" class="w-full max-w-md rounded-lg border" />
+                                </div>
+                                <p class="text-xs text-muted-foreground">Upload an image or provide a URL</p>
+                            </div>
+
+                            <!-- Image Alt Text -->
+                            <div class="space-y-2">
+                                <label for="imageAlt" class="text-sm font-medium flex items-center gap-2">
+                                    <i data-lucide="type" class="w-4 h-4"></i>
+                                    Image Alt Text (SEO)
+                                </label>
+                                <input type="text" id="imageAlt"
+                                    placeholder="Describe the image for accessibility and SEO"
+                                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" />
+                            </div>
+
+                            <!-- Rich Text Editor -->
+                            <div class="space-y-2">
+                                <label class="text-sm font-medium flex items-center gap-2">
+                                    <i data-lucide="edit-3" class="w-4 h-4"></i>
+                                    Content
+                                </label>
+                                <div id="editor" class="bg-background border border-input rounded-md"
+                                    style="min-height: 400px;"></div>
+                                <p class="text-xs text-muted-foreground">
+                                    <span id="wordCount">0</span> words ·
+                                    <span id="readTime">0</span> min read
+                                </p>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit"
+                                class="w-full inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-12 px-4 py-2 shadow-md hover:shadow-lg">
+                                <i data-lucide="send" class="w-4 h-4 mr-2"></i>
+                                Publish Post
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Manage Existing Posts -->
+                <div class="rounded-xl border bg-card text-card-foreground shadow-lg">
+                    <div class="p-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-2xl font-semibold flex items-center gap-2">
+                                <i data-lucide="list" class="w-6 h-6 text-primary"></i>
+                                Manage Posts
+                            </h2>
+                            <button id="refreshPostsBtn"
+                                class="text-sm text-primary hover:underline flex items-center gap-1">
+                                <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                                Refresh
+                            </button>
+                        </div>
+
+                        <div id="postsListContainer">
+                            <div class="flex items-center justify-center py-12">
+                                <i data-lucide="loader-2" class="w-8 h-8 animate-spin text-primary"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Features Grid -->
+                <div class="grid md:grid-cols-3 gap-4 mt-8">
+                    <div class="rounded-lg border bg-card p-4 text-center">
+                        <i data-lucide="file-edit" class="w-8 h-8 mx-auto mb-2 text-primary"></i>
+                        <h3 class="font-semibold mb-1">Blog Management</h3>
+                        <p class="text-sm text-muted-foreground">Create and edit blog posts</p>
+                    </div>
+                    <div class="rounded-lg border bg-card p-4 text-center">
+                        <i data-lucide="bar-chart-3" class="w-8 h-8 mx-auto mb-2 text-primary"></i>
+                        <h3 class="font-semibold mb-1">Analytics</h3>
+                        <p class="text-sm text-muted-foreground">Track site performance</p>
+                    </div>
+                    <div class="rounded-lg border bg-card p-4 text-center">
+                        <i data-lucide="settings" class="w-8 h-8 mx-auto mb-2 text-primary"></i>
+                        <h3 class="font-semibold mb-1">Settings</h3>
+                        <p class="text-sm text-muted-foreground">Manage site configuration</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-navbar border-t border-navbar-foreground/10">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- About Column -->
+                <div class="col-span-1">
+                    <h3 class="text-lg font-bold text-navbar-foreground mb-3 flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
+                            <span class="text-primary font-bold">AA</span>
+                        </div>
+                        Anwar Ali
+                    </h3>
+                    <p class="text-navbar-foreground/70 text-sm mb-6 leading-relaxed">
+                        Local SEO Expert & Digital Marketer helping businesses grow online with proven SEO strategies,
+                        link building, and directory submissions.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <a href="https://www.linkedin.com/in/anwar-sehar" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center justify-center w-11 h-11 rounded-xl bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-300 shadow-sm hover:shadow-lg hover:scale-110"
+                            aria-label="LinkedIn Profile">
+                            <i data-lucide="linkedin" class="w-5 h-5"></i>
+                        </a>
+                        <a href="https://www.facebook.com/arshad.ali.7146557" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center justify-center w-11 h-11 rounded-xl bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-300 shadow-sm hover:shadow-lg hover:scale-110"
+                            aria-label="Facebook Profile">
+                            <i data-lucide="facebook" class="w-5 h-5"></i>
+                        </a>
+                        <a href="https://wa.me/923459842097" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center justify-center w-11 h-11 rounded-xl bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-300 shadow-sm hover:shadow-lg hover:scale-110"
+                            aria-label="WhatsApp">
+                            <i data-lucide="message-square" class="w-5 h-5"></i>
+                        </a>
+                        <a href="mailto:Arshad2097@gmail.com"
+                            class="flex items-center justify-center w-11 h-11 rounded-xl bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-300 shadow-sm hover:shadow-lg hover:scale-110"
+                            aria-label="Email">
+                            <i data-lucide="mail" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-sm font-semibold text-navbar-foreground mb-4 flex items-center gap-2">
+                        <div class="w-1 h-4 bg-primary rounded"></div>
+                        Quick Links
+                    </h4>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="index.html"
+                                class="text-sm text-navbar-foreground/70 hover:text-primary transition-colors flex items-center gap-2 group">
+                                <span
+                                    class="w-1.5 h-1.5 rounded-full bg-primary/50 group-hover:bg-primary transition-colors"></span>
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="about.html"
+                                class="text-sm text-navbar-foreground/70 hover:text-primary transition-colors flex items-center gap-2 group">
+                                <span
+                                    class="w-1.5 h-1.5 rounded-full bg-primary/50 group-hover:bg-primary transition-colors"></span>
+                                About Me
+                            </a>
+                        </li>
+                        <li>
+                            <a href="services.html"
+                                class="text-sm text-navbar-foreground/70 hover:text-primary transition-colors flex items-center gap-2 group">
+                                <span
+                                    class="w-1.5 h-1.5 rounded-full bg-primary/50 group-hover:bg-primary transition-colors"></span>
+                                Services
+                            </a>
+                        </li>
+                        <li>
+                            <a href="work-samples.html"
+                                class="text-sm text-navbar-foreground/70 hover:text-primary transition-colors flex items-center gap-2 group">
+                                <span
+                                    class="w-1.5 h-1.5 rounded-full bg-primary/50 group-hover:bg-primary transition-colors"></span>
+                                Work Samples
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Services Links -->
+                <div>
+                    <h4 class="text-sm font-semibold text-navbar-foreground mb-4 flex items-center gap-2">
+                        <div class="w-1 h-4 bg-primary rounded"></div>
+                        Services
+                    </h4>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="services.html#local-seo"
+                                class="text-sm text-navbar-foreground/70 hover:text-primary transition-colors flex items-center gap-2 group">
+                                <span
+                                    class="w-1.5 h-1.5 rounded-full bg-primary/50 group-hover:bg-primary transition-colors"></span>
+                                Local SEO
+                            </a>
+                        </li>
+                        <li>
+                            <a href="services.html#link-building"
+                                class="text-sm text-navbar-foreground/70 hover:text-primary transition-colors flex items-center gap-2 group">
+                                <span
+                                    class="w-1.5 h-1.5 rounded-full bg-primary/50 group-hover:bg-primary transition-colors"></span>
+                                Link Building
+                            </a>
+                        </li>
+                        <li>
+                            <a href="services.html#directory"
+                                class="text-sm text-navbar-foreground/70 hover:text-primary transition-colors flex items-center gap-2 group">
+                                <span
+                                    class="w-1.5 h-1.5 rounded-full bg-primary/50 group-hover:bg-primary transition-colors"></span>
+                                Directory Submissions
+                            </a>
+                        </li>
+                        <li>
+                            <a href="services.html#local-citations"
+                                class="text-sm text-navbar-foreground/70 hover:text-primary transition-colors flex items-center gap-2 group">
+                                <span
+                                    class="w-1.5 h-1.5 rounded-full bg-primary/50 group-hover:bg-primary transition-colors"></span>
+                                Local Citations
+                            </a>
+                        </li>
+                        <li>
+                            <a href="services.html#google-maps"
+                                class="text-sm text-navbar-foreground/70 hover:text-primary transition-colors flex items-center gap-2 group">
+                                <span
+                                    class="w-1.5 h-1.5 rounded-full bg-primary/50 group-hover:bg-primary transition-colors"></span>
+                                Google Maps Citations
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact Information -->
+                <div>
+                    <h4 class="text-sm font-semibold text-navbar-foreground mb-4 flex items-center gap-2">
+                        <div class="w-1 h-4 bg-primary rounded"></div>
+                        Contact
+                    </h4>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3">
+                            <div
+                                class="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="phone" class="text-green-500 w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-sm font-semibold text-navbar-foreground mb-1">Phone</h5>
+                                <a href="tel:+923459842097"
+                                    class="text-sm text-navbar-foreground/70 hover:text-primary transition-colors">
+                                    +92 345 984 2097
+                                </a>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div
+                                class="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="mail" class="text-purple-500 w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-sm font-semibold text-navbar-foreground mb-1">Email</h5>
+                                <a href="mailto:Arshad2097@gmail.com"
+                                    class="text-sm text-navbar-foreground/70 hover:text-primary transition-colors break-all">
+                                    Arshad2097@gmail.com
+                                </a>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div
+                                class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="clock" class="text-blue-500 w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-sm font-semibold text-navbar-foreground mb-1">Response Time</h5>
+                                <p class="text-sm text-navbar-foreground/70">
+                                    Within 2 hours
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10 pt-6 border-t border-navbar-foreground/10">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p class="text-sm text-navbar-foreground/60 text-center md:text-left">
+                        ©
+                        <script>document.write(new Date().getFullYear())</script> Anwar Ali. All rights reserved.
+                    </p>
+                    <p class="text-sm text-navbar-foreground/60 text-center md:text-right">
+                        Built with expertise in Local SEO & Digital Marketing 🚀
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <!-- Firebase Compat SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+
+    <!-- Quill.js Rich Text Editor -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+    <!-- Config -->
+    <script src="firebase-config.js"></script>
+
+    <script>
+        // Initialize Quill Rich Text Editor
+        let quill;
+        let uploadedImageURL = '';
+
+        if (typeof Quill !== 'undefined') {
+            quill = new Quill('#editor', {
+                theme: 'snow',
+                placeholder: 'Write your blog post content here...',
+                modules: {
+                    toolbar: [
+                        [{ 'header': [2, 3, 4, false] }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                        ['blockquote', 'code-block'],
+                        ['link', 'image'],
+                        ['clean']
+                    ]
+                }
+            });
+
+            // Word count and read time
+            quill.on('text-change', function () {
+                const text = quill.getText();
+                const words = text.trim().split(/\s+/).filter(w => w.length > 0).length;
+                const readTime = Math.ceil(words / 200); // 200 words per minute
+
+                document.getElementById('wordCount').textContent = words;
+                document.getElementById('readTime').textContent = readTime;
+            });
+        }
+
+        // Auto-generate slug from title
+        const titleInput = document.getElementById('postTitle');
+        const slugInput = document.getElementById('postSlug');
+        const slugPreview = document.getElementById('slugPreview');
+        let isSlugManuallyEdited = false;
+
+        if (titleInput && slugInput) {
+            // Handle manual slug editing
+            slugInput.addEventListener('input', function () {
+                isSlugManuallyEdited = true;
+                if (slugPreview) slugPreview.textContent = this.value || 'your-post-title';
+            });
+
+            titleInput.addEventListener('input', function () {
+                // Don't overwrite if manually edited, unless empty
+                if (isSlugManuallyEdited && slugInput.value.trim() !== '') return;
+
+                const slug = this.value
+                    .toLowerCase()
+                    .trim()
+                    .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Remove accents
+                    .replace(/[^a-z0-9\s-]/g, '') // Keep only alphanumeric, spaces, hyphens
+                    .replace(/\s+/g, '-') // Replace spaces with hyphens
+                    .replace(/-+/g, '-'); // Remove duplicate hyphens
+
+                slugInput.value = slug;
+                if (slugPreview) slugPreview.textContent = slug || 'your-post-title';
+            });
+        }
+
+        // Character counters
+        const excerptInput = document.getElementById('postExcerpt');
+        const metaInput = document.getElementById('metaDescription');
+
+        if (excerptInput) {
+            excerptInput.addEventListener('input', function () {
+                document.getElementById('excerptCount').textContent = this.value.length;
+            });
+        }
+
+        if (metaInput) {
+            metaInput.addEventListener('input', function () {
+                document.getElementById('metaCount').textContent = this.value.length;
+            });
+        }
+
+        // Image upload functionality
+        const uploadBtn = document.getElementById('uploadImageBtn');
+        const imageFile = document.getElementById('imageFile');
+        const imageInput = document.getElementById('postImage');
+        const imagePreview = document.getElementById('imagePreview');
+
+        if (uploadBtn && imageFile) {
+            uploadBtn.addEventListener('click', () => {
+                imageFile.click();
+            });
+
+            imageFile.addEventListener('change', async (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                // Show preview
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    imagePreview.querySelector('img').src = e.target.result;
+                    imagePreview.classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+
+                // Upload to Firebase Storage
+                if (typeof firebase !== 'undefined' && firebase.storage) {
+                    try {
+                        uploadBtn.disabled = true;
+                        uploadBtn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 mr-2 animate-spin"></i> Uploading...';
+                        if (window.lucide) lucide.createIcons();
+
+                        const storage = firebase.storage();
+                        const storageRef = storage.ref();
+                        const fileName = `blog-images/${Date.now()}_${file.name}`;
+                        const fileRef = storageRef.child(fileName);
+
+                        await fileRef.put(file);
+                        const downloadURL = await fileRef.getDownloadURL();
+
+                        uploadedImageURL = downloadURL;
+                        imageInput.value = downloadURL;
+
+                        uploadBtn.innerHTML = '<i data-lucide="check" class="w-4 h-4 mr-2"></i> Uploaded!';
+                        if (window.lucide) lucide.createIcons();
+
+                        setTimeout(() => {
+                            uploadBtn.innerHTML = '<i data-lucide="upload" class="w-4 h-4 mr-2"></i> Upload Image';
+                            uploadBtn.disabled = false;
+                            if (window.lucide) lucide.createIcons();
+                        }, 2000);
+                    } catch (error) {
+                        console.error('Upload error:', error);
+                        let errorMsg = 'Error uploading image: ' + error.message;
+                        if (error.code === 'storage/unauthorized') {
+                            errorMsg = 'Firebase Storage not enabled. Please:\n1. Go to Firebase Console\n2. Enable Storage\n3. Set Security Rules\n\nFor now, use an image URL instead.';
+                        }
+                        alert(errorMsg);
+                        uploadBtn.innerHTML = '<i data-lucide="upload" class="w-4 h-4 mr-2"></i> Upload Image';
+                        uploadBtn.disabled = false;
+                        if (window.lucide) lucide.createIcons();
+                    }
+                } else {
+                    alert('Firebase Storage not available. Please use an image URL instead.');
+                }
+            });
+        }
+
+        // Image URL preview
+        if (imageInput) {
+            imageInput.addEventListener('input', function () {
+                if (this.value) {
+                    imagePreview.querySelector('img').src = this.value;
+                    imagePreview.classList.remove('hidden');
+                } else {
+                    imagePreview.classList.add('hidden');
+                }
+            });
+        }
+
+        // Firebase Auth and Post Creation
+        if (typeof firebase !== 'undefined') {
+            const auth = firebase.auth();
+            const db = firebase.firestore();
+
+            auth.onAuthStateChanged((user) => {
+                if (user) {
+                    const infoEl = document.getElementById('userInfo');
+                    if (infoEl) infoEl.textContent = `Logged in as: ${user.email}`;
+                } else {
+                    window.location.href = 'auth.html';
+                }
+            });
+
+            // Logout
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', async () => {
+                    try {
+                        await auth.signOut();
+                        window.location.href = 'auth.html';
+                    } catch (error) {
+                        console.error('Logout error:', error);
+                    }
+                });
+            }
+
+            // Function to generate standalone HTML file for each post
+            async function generatePostHTMLFile(postData) {
+                try {
+                    // Fetch the blog-post.html template
+                    const response = await fetch('blog-post.html');
+                    let template = await response.text();
+
+                    // Replace dynamic content
+                    const date = new Date().toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+
+                    // Update title
+                    template = template.replace(/<title>.*?<\/title>/i, `<title>${postData.title} - Anwar Ali</title>`);
+
+                    // Add/Update meta description
+                    if (postData.metaDescription) {
+                        if (template.includes('<meta name="description"')) {
+                            template = template.replace(/<meta name="description" content=".*?">/i,
+                                `<meta name="description" content="${postData.metaDescription}">`);
+                        } else {
+                            template = template.replace('</head>',
+                                `    <meta name="description" content="${postData.metaDescription}">\n</head>`);
+                        }
+                    }
+
+                    // Add Open Graph tags
+                    const ogTags = `
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://yoursite.com/${postData.slug}.html">
+    <meta property="og:title" content="${postData.title}">
+    <meta property="og:description" content="${postData.metaDescription || postData.excerpt}">
+    <meta property="og:image" content="${postData.image}">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://yoursite.com/${postData.slug}.html">
+    <meta property="twitter:title" content="${postData.title}">
+    <meta property="twitter:description" content="${postData.metaDescription || postData.excerpt}">
+    <meta property="twitter:image" content="${postData.image}">
+`;
+                    template = template.replace('</head>', ogTags + '</head>');
+
+                    // Replace post title in H1
+                    template = template.replace(/Loading Title\.\.\./g, postData.title);
+
+                    // Replace featured image
+                    template = template.replace(/src="https:\/\/images\.unsplash\.com\/.*?"/g,
+                        `src="${postData.image}"`);
+                    template = template.replace(/alt="Featured Image"/g,
+                        `alt="${postData.imageAlt || postData.title}"`);
+
+                    // Replace date
+                    template = template.replace(/id="postDate">.*?</g,
+                        `id="postDate">${date}<`);
+
+                    // Replace content
+                    template = template.replace(/<div class="prose.*?<\/div>\s*<\/div>/s,
+                        `<div class="prose prose-lg dark:prose-invert max-w-none mb-12">\n                ${postData.content}\n            </div>`);
+
+                    // Remove Firebase loading script and replace with static content
+                    const scriptStart = template.indexOf('<script src="https://www.gstatic.com/firebasejs');
+                    const scriptEnd = template.lastIndexOf('</scr' + 'ipt>') + 9;
+                    if (scriptStart !== -1 && scriptEnd !== -1) {
+                        template = template.substring(0, scriptStart) +
+                            `
+    <script>\n        // Static post - no Firebase needed\n        if (window.lucide) lucide.createIcons();\n    </scr` + `ipt>
+    \n` +
+                            template.substring(scriptEnd);
+                    }
+
+                    // Create download
+                    const blob = new Blob([template], { type: 'text/html' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `${postData.slug}.html`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+
+                    // Show success message with instructions
+                    setTimeout(() => {
+                        alert(`✅ HTML file generated!\n\nFile: ${postData.slug}.html\n\nInstructions:\n1. Check your Downloads folder\n2.
+    Move ${postData.slug}.html to your project folder\n3. Access via: ${postData.slug}.html\n\nClean URL:
+    /${postData.slug}`);
+                    }, 500);
+
+                } catch (error) {
+                    console.error('Error generating HTML file:', error);
+                    alert('Error generating HTML file: ' + error.message);
+                }
+            }
+
+            // Load and display all posts for management
+            let currentEditingPostId = null;
+
+            async function loadAllPosts() {
+                const container = document.getElementById('postsListContainer');
+                try {
+                    const querySnapshot = await db.collection("posts")
+                        .orderBy("createdAt", "desc")
+                        .get();
+
+                    if (querySnapshot.empty) {
+                        container.innerHTML = `
+    <div class="text-center py-12">
+        <i data-lucide="inbox" class="w-12 h-12 mx-auto mb-3 text-muted-foreground"></i>
+        <p class="text-muted-foreground">No posts yet. Create your first post above!</p>
+    </div>
+    `;
+                        if (window.lucide) lucide.createIcons();
+                        return;
+                    }
+
+                    let postsHTML = '<div class="space-y-3">';
+                    querySnapshot.forEach((doc) => {
+                        const post = doc.data();
+                        const excerpt = post.excerpt || (post.content ? post.content.substring(0, 100) : '');
+                        const date = post.createdAt ? new Date(post.createdAt.seconds * 1000).toLocaleDateString() : 'Recent';
+
+                        postsHTML += `
+        <div class="flex items-center gap-4 p-4 border border-border rounded-lg hover:bg-accent/50 transition-colors">
+            <img src="${post.image || 'https://via.placeholder.com/80'}" alt="${post.title}"
+                class="w-20 h-20 object-cover rounded-lg flex-shrink-0">
+            <div class="flex-1 min-w-0">
+                <h3 class="font-semibold text-foreground truncate">${post.title}</h3>
+                <p class="text-sm text-muted-foreground truncate">${excerpt.replace(/<[^>]*>/g, '')}...</p>
+                <div class="flex items-center gap-3 mt-1 text-xs text-muted-foreground">
+                    <span class="flex items-center gap-1">
+                        <i data-lucide="calendar" class="w-3 h-3"></i>
+                        ${date}
+                    </span>
+                    ${post.readTime ? `<span class="flex items-center gap-1">
+                        <i data-lucide="clock" class="w-3 h-3"></i>
+                        ${post.readTime} min
+                    </span>` : ''}
+                </div>
+            </div>
+            <div class="flex gap-2 flex-shrink-0">
+                <button onclick="editPost('${doc.id}')"
+                    class="inline-flex items-center justify-center rounded-md text-sm font-medium h-9 px-3 border border-input bg-background hover:bg-accent hover:text-accent-foreground">
+                    <i data-lucide="edit" class="w-4 h-4 mr-1"></i>
+                    Edit
+                </button>
+                <button data-post-id="${doc.id}" data-post-title="${post.title}"
+                    class="delete-post-btn inline-flex items-center justify-center rounded-md text-sm font-medium h-9 px-3 bg-destructive text-destructive-foreground hover:bg-destructive/90">
+                    <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i>
+                    Delete
+                </button>
+            </div>
+        </div>
+        `;
+                    });
+                    postsHTML += '</div>';
+
+                    container.innerHTML = postsHTML;
+                    if (window.lucide) lucide.createIcons();
+
+                } catch (error) {
+                    console.error("Error loading posts:", error);
+                    container.innerHTML = `<p class="text-center text-destructive">Error loading posts: ${error.message}</p>`;
+                }
+            }
+
+            // Edit post - populate form with existing data
+            window.editPost = async function (postId) {
+                try {
+                    const docSnap = await db.collection("posts").doc(postId).get();
+
+                    if (docSnap.exists) {
+                        const post = docSnap.data();
+
+                        // Populate form fields
+                        document.getElementById('postTitle').value = post.title || '';
+                        document.getElementById('postSlug').value = post.slug || '';
+                        if (post.slug) isSlugManuallyEdited = true;
+                        document.getElementById('postExcerpt').value = post.excerpt || '';
+                        document.getElementById('metaDescription').value = post.metaDescription || '';
+                        document.getElementById('focusKeyword').value = post.focusKeyword || '';
+                        document.getElementById('postCategories').value = post.categories ? post.categories.join(', ') : '';
+                        document.getElementById('postImage').value = post.image || '';
+                        document.getElementById('imageAlt').value = post.imageAlt || '';
+
+                        // Set Quill content
+                        if (quill && post.content) {
+                            quill.root.innerHTML = post.content;
+                        }
+
+                        // Show image preview
+                        if (post.image) {
+                            const preview = document.getElementById('imagePreview');
+                            preview.querySelector('img').src = post.image;
+                            preview.classList.remove('hidden');
+                        }
+
+                        // Update character counters
+                        document.getElementById('excerptCount').textContent = (post.excerpt || '').length;
+                        document.getElementById('metaCount').textContent = (post.metaDescription || '').length;
+
+                        // Store the post ID for updating
+                        currentEditingPostId = postId;
+
+                        // Change button text
+                        const submitBtn = document.querySelector('#createPostForm button[type="submit"]');
+                        submitBtn.innerHTML = '<i data-lucide="save" class="w-4 h-4 mr-2"></i> Update Post';
+                        if (window.lucide) lucide.createIcons();
+
+                        // Scroll to form
+                        document.querySelector('#createPostForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                        alert('✏️ Post loaded for editing. Make your changes and click "Update Post".');
+                    }
+                } catch (error) {
+                    console.error("Error loading post for edit:", error);
+                    alert('Error loading post: ' + error.message);
+                }
+            };
+
+            // Delete post with confirmation
+            window.deletePost = async function (postId, postTitle) {
+                if (!confirm(`Are you sure you want to delete "${postTitle}"?\n\nThis action cannot be undone.`)) {
+                    return;
+                }
+
+                try {
+                    await db.collection("posts").doc(postId).delete();
+                    alert('✅ Post deleted successfully!');
+                    loadAllPosts(); // Refresh the list
+                } catch (error) {
+                    console.error("Error deleting post:", error);
+                    alert('❌ Error deleting post: ' + error.message);
+                }
+            };
+
+            // Modify form submission to handle both create and update
+            const createPostForm = document.getElementById('createPostForm');
+            if (createPostForm) {
+                createPostForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const btn = e.target.querySelector('button[type="submit"]');
+                    const originalText = btn.innerHTML;
+
+                    // Get all form values
+                    const title = document.getElementById('postTitle').value;
+                    const slug = document.getElementById('postSlug').value;
+                    const excerpt = document.getElementById('postExcerpt').value;
+                    const metaDescription = document.getElementById('metaDescription').value;
+                    const focusKeyword = document.getElementById('focusKeyword').value;
+                    const categories = document.getElementById('postCategories').value;
+                    const image = document.getElementById('postImage').value;
+                    const imageAlt = document.getElementById('imageAlt').value;
+                    const content = quill ? quill.root.innerHTML : '';
+
+                    // Calculate read time
+                    const text = quill ? quill.getText() : '';
+                    const words = text.trim().split(/\s+/).filter(w => w.length > 0).length;
+                    const readTime = Math.ceil(words / 200);
+
+                    try {
+                        btn.disabled = true;
+                        btn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 mr-2 animate-spin"></i> ' +
+                            (currentEditingPostId ? 'Updating...' : 'Publishing...');
+                        if (window.lucide) lucide.createIcons();
+
+                        if (!auth.currentUser) {
+                            throw new Error("You must be logged in to post.");
+                        }
+
+                        // Create post object with all fields
+                        const postData = {
+                            // Basic fields
+                            title: title,
+                            slug: slug,
+                            content: content,
+                            excerpt: excerpt || content.substring(0, 160),
+
+                            // Image fields
+                            image: image,
+                            imageAlt: imageAlt || title,
+
+                            // SEO fields
+                            metaDescription: metaDescription || excerpt || content.substring(0, 160),
+                            focusKeyword: focusKeyword,
+                            categories: categories ? categories.split(',').map(c => c.trim()) : [],
+
+                            // Author fields
+                            authorId: auth.currentUser.uid,
+                            authorEmail: auth.currentUser.email,
+                            authorName: auth.currentUser.displayName || auth.currentUser.email.split('@')[0],
+
+                            // Metadata
+                            publishDate: firebase.firestore.FieldValue.serverTimestamp(),
+                            status: 'published',
+                            readTime: readTime,
+                            views: 0
+                        };
+
+                        if (currentEditingPostId) {
+                            // Update existing post
+                            postData.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
+                            await db.collection("posts").doc(currentEditingPostId).update(postData);
+                            alert('✅ Post updated successfully!');
+                            currentEditingPostId = null;
+                        } else {
+                            // Create new post
+                            postData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+                            await db.collection("posts").add(postData);
+                            alert('✅ Post published successfully!');
+                        }
+
+                        // Reset form
+                        e.target.reset();
+                        if (quill) quill.setContents([]);
+                        imagePreview.classList.add('hidden');
+                        slugPreview.textContent = 'your-post-title';
+                        document.getElementById('wordCount').textContent = '0';
+                        document.getElementById('readTime').textContent = '0';
+                        document.getElementById('excerptCount').textContent = '0';
+                        document.getElementById('metaCount').textContent = '0';
+                        isSlugManuallyEdited = false;
+
+                        // Reset button
+                        btn.innerHTML = '<i data-lucide="send" class="w-4 h-4 mr-2"></i> Publish Post';
+                        if (window.lucide) lucide.createIcons();
+
+                        // Generate HTML file for the post
+                        if (postData.slug) {
+                            generatePostHTMLFile(postData);
+                        }
+
+                        // Refresh posts list
+                        loadAllPosts();
+
+                    } catch (error) {
+                        console.error("Error saving post: ", error);
+                        alert(`❌ Error saving post: ${error.message}`);
+                    } finally {
+                        btn.disabled = false;
+                        btn.innerHTML = originalText;
+                        if (window.lucide) lucide.createIcons();
+                    }
+                });
+            }
+
+            // Refresh button
+            const refreshBtn = document.getElementById('refreshPostsBtn');
+            if (refreshBtn) {
+                refreshBtn.addEventListener('click', loadAllPosts);
+            }
+
+            // Event delegation for delete buttons (since they're dynamically created)
+            document.addEventListener('click', function (e) {
+                if (e.target.closest('.delete-post-btn')) {
+                    const btn = e.target.closest('.delete-post-btn');
+                    const postId = btn.dataset.postId;
+                    const postTitle = btn.dataset.postTitle;
+                    deletePost(postId, postTitle);
+                }
+            });
+
+            // Load posts on page load
+            loadAllPosts();
+        } else {
+            console.error("Firebase not loaded");
+            alert("System error: Firebase SDK not loaded. Please check your internet connection.");
+        }
+
+        // Initialize Icons
+        if (window.lucide) lucide.createIcons();
+    </script>
+</body>
+
+</html>

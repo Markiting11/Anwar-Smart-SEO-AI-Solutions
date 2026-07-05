@@ -1,0 +1,267 @@
+:root {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 10%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 10%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 10%;
+
+  --primary: 158 64% 52%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 158 20% 95%;
+  --secondary-foreground: 0 0% 10%;
+
+  --muted: 220 15% 96%;
+  --muted-foreground: 0 0% 45%;
+
+  --accent: 250 70% 60%;
+  --accent-foreground: 0 0% 100%;
+
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 220 20% 90%;
+  --input: 220 20% 90%;
+  --ring: 158 64% 52%;
+
+  --navbar: 0 0% 5%;
+  --navbar-foreground: 0 0% 100%;
+
+  --hero-image-bg: 240 80% 60%;
+
+  --radius: 1rem;
+
+  /* Modern Gradients */
+  --gradient-hero: linear-gradient(135deg, hsl(158 64% 52%) 0%, hsl(158 60% 45%) 100%);
+  --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(220 15% 98%) 100%);
+  --gradient-primary: linear-gradient(135deg, hsl(158 64% 52% / 0.1) 0%, hsl(250 70% 60% / 0.05) 100%);
+  --gradient-accent: linear-gradient(120deg, hsl(158 64% 52% / 0.08) 0%, hsl(250 70% 60% / 0.08) 100%);
+  --gradient-navbar: linear-gradient(180deg, hsl(0 0% 5%) 0%, hsl(0 0% 3%) 100%);
+
+  /* Modern Shadows */
+  --shadow-soft: 0 4px 6px -1px hsl(158 64% 52% / 0.1), 0 2px 4px -1px hsl(158 64% 52% / 0.06);
+  --shadow-medium: 0 10px 15px -3px hsl(158 64% 52% / 0.1), 0 4px 6px -2px hsl(158 64% 52% / 0.05);
+  --shadow-large: 0 20px 25px -5px hsl(158 64% 52% / 0.15), 0 10px 10px -5px hsl(158 64% 52% / 0.04);
+  --shadow-glow: 0 0 40px hsl(158 64% 52% / 0.15);
+  --shadow-card: 0 2px 8px hsl(0 0% 0% / 0.04), 0 1px 2px hsl(0 0% 0% / 0.06);
+  --shadow-navbar: 0 4px 12px hsl(158 64% 52% / 0.15);
+
+  /* Glassmorphism */
+  --glass-bg: hsl(0 0% 100% / 0.7);
+  --glass-border: hsl(0 0% 100% / 0.2);
+
+  /* Transitions */
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.dark {
+  --background: 0 0% 10%;
+  --foreground: 0 0% 98%;
+
+  --card: 0 0% 13%;
+  --card-foreground: 0 0% 98%;
+
+  --popover: 0 0% 13%;
+  --popover-foreground: 0 0% 98%;
+
+  --primary: 158 64% 52%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 0 0% 17%;
+  --secondary-foreground: 0 0% 98%;
+
+  --muted: 0 0% 17%;
+  --muted-foreground: 0 0% 65%;
+
+  --accent: 250 70% 60%;
+  --accent-foreground: 0 0% 100%;
+
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+
+  --border: 0 0% 20%;
+  --input: 0 0% 20%;
+  --ring: 158 64% 52%;
+
+  --navbar: 0 0% 5%;
+  --navbar-foreground: 0 0% 100%;
+
+  --hero-image-bg: 240 80% 60%;
+}
+
+/* Navbar Enhancements - Green, White, Black Theme */
+nav {
+  background: var(--gradient-navbar) !important;
+  border-bottom: 2px solid hsl(158 64% 52% / 0.4) !important;
+  box-shadow: var(--shadow-navbar) !important;
+  backdrop-filter: blur(10px);
+}
+
+/* Logo hover effect */
+nav a[href*="index.html"]:first-of-type:hover {
+  opacity: 1 !important;
+}
+
+nav a[href*="index.html"]:first-of-type:hover span {
+  color: hsl(158 64% 52%) !important;
+  transition: color 0.3s ease;
+}
+
+/* Ensure navigation items stay on single line */
+nav .hidden.md\\:flex {
+  flex-wrap: nowrap !important;
+  white-space: nowrap !important;
+}
+
+/* Navigation link styles - Green, White, Black */
+nav .hidden.md\\:flex a:not(:has(button)) {
+  position: relative;
+  color: hsl(0 0% 90%) !important;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+/* Active page indicator - Green background */
+nav .hidden.md\\:flex a.active,
+nav .hidden.md\\:flex a[class*="bg-primary"] {
+  background: linear-gradient(135deg, hsl(158 64% 52% / 0.2), hsl(158 64% 52% / 0.1)) !important;
+  color: hsl(158 64% 52%) !important;
+  border: 1px solid hsl(158 64% 52% / 0.3);
+  box-shadow: 0 0 15px hsl(158 64% 52% / 0.2);
+}
+
+/* Hover effect - Green glow */
+nav .hidden.md\\:flex a:not(:has(button)):hover {
+  color: hsl(158 64% 52%) !important;
+  background: hsl(158 64% 52% / 0.1) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px hsl(158 64% 52% / 0.3);
+}
+
+/* Underline animation on hover */
+nav .hidden.md\\:flex a:not(:has(button))::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: hsl(158 64% 52%);
+  transition: width 0.3s ease;
+}
+
+nav .hidden.md\\:flex a:not(:has(button)):hover::after {
+  width: 80%;
+}
+
+/* Hire Me button - Enhanced green theme */
+nav button {
+  background: linear-gradient(135deg, hsl(158 64% 52%), hsl(158 60% 45%)) !important;
+  border: 2px solid hsl(158 64% 52%) !important;
+  color: white !important;
+  font-weight: 600;
+  box-shadow: 0 4px 15px hsl(158 64% 52% / 0.4);
+  transition: all 0.3s ease;
+}
+
+nav button:hover {
+  background: linear-gradient(135deg, hsl(158 60% 45%), hsl(158 64% 52%)) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px hsl(158 64% 52% / 0.6) !important;
+}
+
+/* Mobile menu button */
+nav #mobile-menu-button {
+  color: hsl(0 0% 100%) !important;
+  transition: all 0.3s ease;
+}
+
+nav #mobile-menu-button:hover {
+  background: hsl(158 64% 52% / 0.2) !important;
+  color: hsl(158 64% 52%) !important;
+}
+
+/* Footer Enhancements - Matching Header Theme */
+footer {
+  background: var(--gradient-navbar) !important;
+  border-top: 2px solid hsl(158 64% 52% / 0.4) !important;
+  box-shadow: 0 -4px 12px hsl(158 64% 52% / 0.15) !important;
+}
+
+/* Green accent on hover for footer links */
+footer a:hover {
+  color: hsl(158 64% 52%) !important;
+  transition: color 0.3s ease;
+}
+
+/* Enhanced social icons in footer */
+footer a[aria-label] {
+  background: linear-gradient(135deg, hsl(158 64% 52% / 0.15), hsl(158 64% 52% / 0.05)) !important;
+  border: 1px solid hsl(158 64% 52% / 0.2) !important;
+  transition: all 0.3s ease;
+}
+
+footer a[aria-label]:hover {
+  background: linear-gradient(135deg, hsl(158 64% 52%), hsl(158 60% 45%)) !important;
+  border-color: hsl(158 64% 52%) !important;
+  transform: translateY(-3px) scale(1.05) !important;
+  box-shadow: 0 6px 20px hsl(158 64% 52% / 0.5) !important;
+}
+
+/* Footer section headers with green accent */
+footer h3,
+footer h4,
+footer h5 {
+  color: hsl(0 0% 100%) !important;
+}
+
+footer .bg-primary\\/20 {
+  background: hsl(158 64% 52% / 0.2) !important;
+}
+
+/* Utilities */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+}
+
+.shadow-glow {
+  box-shadow: var(--shadow-glow);
+}
+
+.shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+.gradient-primary {
+  background: var(--gradient-primary);
+}
+
+.gradient-accent {
+  background: var(--gradient-accent);
+}
+
+/* Animation utilities */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
